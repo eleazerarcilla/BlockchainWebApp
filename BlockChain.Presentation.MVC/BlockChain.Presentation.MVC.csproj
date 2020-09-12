@@ -19,7 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\ProductListFiles\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
 

@@ -28,26 +28,26 @@ namespace BlockChain.Presentation.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(IFormFile productListFile)
+        public async Task<IActionResult> UploadFile(IFormFile uploadedFile)
         {
-            if (productListFile == null || productListFile.Length == 0)
+            if (uploadedFile == null || uploadedFile.Length == 0)
                 return Content("File Not Selected");
 
-            string fileExtension = Path.GetExtension(productListFile.FileName);
+            string fileExtension = Path.GetExtension(uploadedFile.FileName);
 
             if (fileExtension == ".xls" || fileExtension == ".xlsx")
             {
-                var rootFolder = $"{Directory.GetCurrentDirectory()}\\wwwroot\\ProductListFiles";
-                var fileName = productListFile.FileName;
+                var rootFolder = $"{Directory.GetCurrentDirectory()}\\wwwroot\\Files";
+                var fileName = uploadedFile.FileName;
                 var filePath = Path.Combine(rootFolder, fileName);
                 var fileLocation = new FileInfo(filePath);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await productListFile.CopyToAsync(fileStream);
+                    await uploadedFile.CopyToAsync(fileStream);
                 }
 
-                if (productListFile.Length <= 0)
+                if (uploadedFile.Length <= 0)
                     return BadRequest("Empty File");
 
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
