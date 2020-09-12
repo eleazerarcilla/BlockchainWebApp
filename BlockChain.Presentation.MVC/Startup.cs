@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlockChain.Presentation.MVC.Contexts;
+using BlockChain.Presentation.MVC.Models.Interfaces;
+using BlockChain.Presentation.MVC.Models.Interfaces.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +29,7 @@ namespace BlockChain.Presentation.MVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("App")));
-
+            services.AddSingleton<IProductList, ProductListRepository>();
             //Singletons para sa models/Interfaces
         }
 

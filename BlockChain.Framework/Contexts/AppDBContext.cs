@@ -12,11 +12,13 @@ namespace BlockChain.Presentation.MVC.Contexts
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
         public DbSet<CommonItems> CommonItems { get; set; }
         public DbSet<PermittedAdditive> PermittedAdditives { get; set; }
+        public DbSet<ProductList> ProductList { get; set; }
         //Model DBsets
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<CommonItems>();
             builder.Entity<PermittedAdditive>();
+            builder.Entity<ProductList>();
         }
     }
 }
