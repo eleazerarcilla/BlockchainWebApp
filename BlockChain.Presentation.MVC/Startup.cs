@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlockChain.Framework.Entities;
 using BlockChain.Presentation.MVC.Contexts;
 using BlockChain.Presentation.MVC.Models.Interfaces;
 using BlockChain.Presentation.MVC.Models.Interfaces.Repositories;
@@ -31,6 +32,7 @@ namespace BlockChain.Presentation.MVC
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("App")));
             services.AddSingleton<IProductList, ProductListRepository>();
             //Singletons para sa models/Interfaces
+            services.AddSingleton<ICommonItems, CommonItemsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,6 +9,7 @@ using BlockChain.Presentation.MVC.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using static BlockChain.Framework.Common.GlobalHelpers;
 
 namespace BlockChain.Presentation.MVC.Controllers
 {
@@ -30,7 +31,7 @@ namespace BlockChain.Presentation.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadFile(IFormFile uploadedFile)
         {
-            if (uploadedFile == null || uploadedFile.Length == 0)
+            if (uploadedFile.IsFileValid())
                 return Content("File Not Selected");
 
             string fileExtension = Path.GetExtension(uploadedFile.FileName);
@@ -38,24 +39,13 @@ namespace BlockChain.Presentation.MVC.Controllers
             if (fileExtension == ".xls" || fileExtension == ".xlsx")
             {
                 var rootFolder = $"{Directory.GetCurrentDirectory()}\\wwwroot\\Files";
-                var fileName = uploadedFile.FileName;
-                var filePath = Path.Combine(rootFolder, fileName);
-                var fileLocation = new FileInfo(filePath);
-
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-
-                if (uploadedFile.Length <= 0)
-                    return BadRequest("Empty File");
+                var fileLocation = await uploadedFile.GetFileLocationAndSaveFile(rootFolder);
 
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 using (ExcelPackage package = new ExcelPackage(fileLocation))
                 {
                     
                     ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
-                    //var workSheet = package.Workbook.Worksheets.First();
                     int totalRows = workSheet.Dimension.Rows;
                     List<ProductList> productList = new List<ProductList>();
 
