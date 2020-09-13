@@ -31,5 +31,10 @@ namespace BlockChain.Presentation.MVC.Models.Interfaces.Repositories
             }
             return await Task.FromResult(result);
         }
+
+        public async Task<List<CommonItems>> GetAll(AppDBContext appDBContext)
+        {
+            return await Task.FromResult(appDBContext.CommonItems.ToList());
+        }
     }
 }

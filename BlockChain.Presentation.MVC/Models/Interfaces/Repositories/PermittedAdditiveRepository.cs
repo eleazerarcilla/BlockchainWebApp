@@ -9,7 +9,7 @@ namespace BlockChain.Presentation.MVC.Models.Interfaces.Repositories
 {
     public class PermittedAdditiveRepository : IPermittedAdditives
     {
-        public async Task<IEnumerable<PermittedAdditive>> GetAll(AppDBContext appDBContext)
+        public async Task<List<PermittedAdditive>> GetAll(AppDBContext appDBContext)
         {
             return await Task.FromResult(appDBContext.PermittedAdditives.ToList());
         }

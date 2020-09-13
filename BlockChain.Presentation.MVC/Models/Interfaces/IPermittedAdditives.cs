@@ -9,6 +9,6 @@ namespace BlockChain.Presentation.MVC.Models.Interfaces
 {
     public interface IPermittedAdditives
     {
-        Task<IEnumerable<PermittedAdditive>> GetAll(AppDBContext appDBContext);
+        Task<List<PermittedAdditive>> GetAll(AppDBContext appDBContext);
     }
 }

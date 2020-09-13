@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlockChain.Framework.Entities;
+using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace BlockChain.Presentation.MVC.Controllers
 {
     public class ExportController : Controller
     {
-        [HttpGet]
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index([FromBody] List<ProductList> productLists)
         {
             MemoryStream stream = new MemoryStream();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;

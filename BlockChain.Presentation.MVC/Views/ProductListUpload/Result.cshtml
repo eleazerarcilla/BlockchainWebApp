@@ -1,0 +1,27 @@
+﻿@model List<BlockChain.Framework.Entities.ProductList>
+    <form id="frmResult" action="/Export" method="post">
+        <input type="submit" id="btnDownload" name="btnDownload" value="Download Report" />
+    </form>
+<script>
+    $("#frmResult").submit(function (e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var jsonData = '@Html.Raw(Json.Serialize(@Model))';
+    $.ajax(
+        {
+            type: "POST",
+            url: url,
+            dataType: "application/json",
+            data: jsonData,
+            processData: false,
+            contentType: "application/json",
+            success: function (data) {
+               
+            },
+            error: function (jqXHR, exception) {
+                var msg = '';
+            }
+        });
+})
+</script>

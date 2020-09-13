@@ -10,5 +10,6 @@ namespace BlockChain.Presentation.MVC.Models.Interfaces
     public interface ICommonItems
     {
         Task<bool> Save(AppDBContext appDBContext, List<CommonItems> commonItems);
+        Task<List<CommonItems>> GetAll(AppDBContext appDBContext);
     }
 }

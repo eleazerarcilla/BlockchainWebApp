@@ -13,6 +13,8 @@ namespace BlockChain.Presentation.MVC.Contexts
         public DbSet<CommonItems> CommonItems { get; set; }
         public DbSet<PermittedAdditive> PermittedAdditives { get; set; }
         public DbSet<ProductList> ProductList { get; set; }
+        public object Keywords { get; set; }
+
         //Model DBsets
         protected override void OnModelCreating(ModelBuilder builder)
         {

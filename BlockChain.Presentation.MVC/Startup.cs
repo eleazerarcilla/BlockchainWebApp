@@ -33,6 +33,7 @@ namespace BlockChain.Presentation.MVC
             services.AddSingleton<IProductList, ProductListRepository>();
             //Singletons para sa models/Interfaces
             services.AddSingleton<ICommonItems, CommonItemsRepository>();
+            services.AddSingleton<IPermittedAdditives, PermittedAdditiveRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

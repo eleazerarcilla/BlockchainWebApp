@@ -1,9 +1,21 @@
-﻿//$("#btnSubmit").on("click", function () {
-//    var xhr = new XMLHttpRequest();
-//    var productList = new FormData($('form').get(0));
-//    xhr.open("POST", "/ProductListUpload/UploadFile/");
-//    xhr.send(productList);
-//    xhr.addEventListener("load", function (event) {
-//        alert(event.target.response);
-//    }, false);
-//})
+﻿$("#frmProductListUpload").submit(function (e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax(
+        {
+            type: "POST",
+            url: url,
+            dataType: "html",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $("#divResult").html(data);
+            },
+            error: function (jqXHR, exception) {
+                var msg = '';
+            }
+        });
+});
+
